@@ -206,17 +206,19 @@ def dome1410():
         nodes, elems = revolve(*dome1410())
 
     Koohestani, K., and A. Kaveh.
-       “Efficient Buckling and Free Vibration Analysis of Cyclically Repeated Space Truss Structures.” Finite Elements in Analysis and Design 46, no. 10 (October 2010): 943–48. https://doi.org/10.1016/j.finel.2010.06.009.
+       “Efficient Buckling and Free Vibration Analysis of Cyclically Repeated Space Truss Structures.” 
+       Finite Elements in Analysis and Design 46, no. 10 (October 2010): 943–48. 
+       https://doi.org/10.1016/j.finel.2010.06.009.
     """
     s = 30
     n = 13
     nodes = {
-        1:  ( 1.0,0.0,4.0) ,
-        2:  ( 3.0,0.0,3.75) ,
-        3:  ( 5.0,0.0,3.25) ,
-        4:  ( 7.0,0.0,2.75) ,
-        5:  ( 9.0,0.0,2.0) ,
-        6:  (11.0,0.0,1.25) ,
+        1:  ( 1.0,0.0,4.0),
+        2:  ( 3.0,0.0,3.75),
+        3:  ( 5.0,0.0,3.25),
+        4:  ( 7.0,0.0,2.75),
+        5:  ( 9.0,0.0,2.0),
+        6:  (11.0,0.0,1.25),
         7:  (13.0,0.0,0.0),
         8:  ( 1.989,0.209, 3.0),
         9:  ( 3.978,0.418,2.75),
@@ -306,7 +308,7 @@ def revolve(ref_nodes, ref_elems, fixed, count, key_nodes=None, scale=1, shift=N
     return nodes, elems
 
 
-def create_truss(nodes, elems, areas=None):
+def create_truss(nodes, elems, area=1.0, modulus=3000):
     """
     Create a truss model in OpenSees
     """
@@ -315,9 +317,8 @@ def create_truss(nodes, elems, areas=None):
     model = ops.Model(ndm=3, ndf=3)
 
     # Define a linear-elastic material
-    model.uniaxialMaterial('Elastic', 1, 3000)
+    model.uniaxialMaterial('Elastic', 1, modulus)
 
-    area = 1.0
 
     # Add nodes to the model
     for tag, node in nodes.items():
@@ -328,6 +329,14 @@ def create_truss(nodes, elems, areas=None):
         model.element("Truss", tag, nodes, area, 1)
 
     return model
+
+
+def create_builder(nodes, elems):
+
+    def build_truss(area, modulus):
+        return create_truss(nodes, elems, area, modulus)
+    
+    return build_truss
 
 
 if __name__ == "__main__":
