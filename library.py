@@ -308,7 +308,7 @@ def revolve(ref_nodes, ref_elems, fixed, count, key_nodes=None, scale=1, shift=N
     return nodes, elems
 
 
-def create_truss(nodes, elems, area=1.0, modulus=3000):
+def create_truss(nodes, elems, area=1.0, modulus=3000, density=1.0):
     """
     Create a truss model in OpenSees
     """
@@ -317,7 +317,7 @@ def create_truss(nodes, elems, area=1.0, modulus=3000):
     model = ops.Model(ndm=3, ndf=3)
 
     # Define a linear-elastic material
-    model.uniaxialMaterial('Elastic', 1, modulus)
+    model.uniaxialMaterial('Elastic', 1, modulus)#, density=density)
 
 
     # Add nodes to the model
