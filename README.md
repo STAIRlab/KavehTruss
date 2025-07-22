@@ -6,6 +6,9 @@ bibliography: references.json
 draft: false
 ---
 
+
+> Note: view [here](https://datahub.berkeley.edu/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FSTAIRlab%2FKavehTruss&urlpath=lab%2Ftree%2FKavehTruss%2Fmodel.ipynb&branch=master)
+
 A variety of periodic truss structures are investigated. This class of
 models was investigated by <cite key="kaveh2010optimum"></cite>.
 All figures have been produced with [`veux`](https://veux.io).
