@@ -331,7 +331,15 @@ def create_truss(nodes, elems, area=1.0, modulus=3000):
     return model
 
 
-def create_builder(nodes, elems):
+def create_builder(prototype):
+    if prototype == "dome120": 
+        nodes, elems = revolve(*dome120())
+    elif prototype == "dome600":
+        nodes, elems = revolve(*dome600())
+    elif prototype == "dome1410":
+        nodes, elems = revolve(*dome1410())
+    elif prototype == "dome1180":
+        nodes, elems = revolve(*dome1180())
 
     def build_truss(area, modulus):
         return create_truss(nodes, elems, area, modulus)

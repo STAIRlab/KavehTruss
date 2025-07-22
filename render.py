@@ -1,5 +1,5 @@
 import sys
-from revolve import revolve, create_truss, create_dome
+from library import revolve, create_truss, create_dome
 
 if __name__ == "__main__":
     import veux
